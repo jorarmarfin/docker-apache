@@ -1,0 +1,1 @@
+docker run --name srv-laravel -d -p 8181:80 lfmc/iso-laravel

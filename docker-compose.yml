@@ -1,0 +1,7 @@
+version: '3'
+services:
+  web:
+    container_name: srv-laravel
+    port:
+      - "81:80"
+    image: nginx
