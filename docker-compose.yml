@@ -2,6 +2,13 @@ version: '3'
 services:
   web:
     container_name: srv-laravel
-    port:
+    image: lfmc/iso-laravel
+    build: .
+    volumes:
+      - /home/lmayta/Docker/Volumen/apache/html:/var/www/html
+    ports:
       - "81:80"
-    image: nginx
+    networks:
+      - net
+networks:
+  net:
