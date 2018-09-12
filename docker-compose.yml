@@ -1,11 +1,11 @@
 version: '3'
 services:
   web:
-    container_name: srv-laravel
-    image: lfmc/iso-laravel
+    container_name: srv-apache
+    image: lfmc/iso-apache
     build: .
     volumes:
-      - /home/lmayta/Docker/Volumen/apache/html:/var/www/html
+      - ./apache:/var/www/html
     ports:
       - "81:80"
     networks:
