@@ -1,1 +1,1 @@
-docker build -t lfmc/iso-laravel .
+docker build -t lfmc/iso-apache .

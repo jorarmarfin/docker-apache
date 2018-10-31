@@ -5,10 +5,31 @@ services:
     image: lfmc/iso-apache
     build: .
     volumes:
-      - ./apache:/var/www/html
+      - ./apache/html:/var/www/html
     ports:
       - "81:80"
     networks:
-      - net
+      - net-apache
+  db:
+    container_name: srv-mysql
+    image: mysql:5.7
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=${PASS_MYSQL}
+    volumes:
+      - ${MYSQL_FILES}:/var/lib/mysql
+      - ${MYSQL_CONFIG}:/etc/mysql/conf.d
+    restart: always
+    networks:
+      - net-apache
+  adminer:
+    container_name: srv-adminer
+    image: adminer:latest
+    ports:
+      - 8080:8080
+    restart: always
+    networks:
+      - net-apache
 networks:
-  net:
+  net-apache:
