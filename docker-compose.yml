@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     container_name: srv-apache
-    image: lfmc/iso-apache
+    image: lfmc/iso-apache:${VERSION_PHP}
     build: .
     volumes:
       - ./apache/html:/var/www/html
