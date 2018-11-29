@@ -24,10 +24,10 @@ services:
     networks:
       - net-apache
   adminer:
-    container_name: srv-adminer
-    image: adminer:latest
+    container_name: srv-phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
     ports:
-      - 8080:8080
+      - 8080:80
     restart: always
     networks:
       - net-apache
