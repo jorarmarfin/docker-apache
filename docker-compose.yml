@@ -7,14 +7,15 @@ services:
     volumes:
       - ./apache/html:/var/www/html
     ports:
-      - "81:80"
+      - ${PUERTO_APACHE}:80
+    restart: always
     networks:
       - net-apache
   db:
     container_name: srv-mysql
     image: mysql:5.7
     ports:
-      - 3307:3306
+      - ${PUERTO_mysql}:3306
     environment:
       - MYSQL_ROOT_PASSWORD=${PASS_MYSQL}
     volumes:
@@ -27,7 +28,7 @@ services:
     container_name: srv-adminer
     image: adminer:latest
     ports:
-      - 8080:8080
+      - ${PUERTO_gestor}:8080
     restart: always
     networks:
       - net-apache
