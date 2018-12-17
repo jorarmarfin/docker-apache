@@ -2,8 +2,7 @@ version: '3'
 services:
   web:
     container_name: srv-apache
-    image: lfmc/iso-apache:${VERSION_PHP}
-    build: .
+    image: jorarmarfin/apache:7.2-apache
     volumes:
       - ./apache/html:/var/www/html
     ports:

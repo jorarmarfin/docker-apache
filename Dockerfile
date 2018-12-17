@@ -5,7 +5,8 @@ RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libpq-dev libxml
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
     && docker-php-ext-install gd mbstring pdo_mysql pdo_pgsql zip mysqli \
     && docker-php-ext-enable mysqli \
-    && a2enmod rewrite
+    && a2enmod rewrite \
+    && chmod 0777 /var/www/html
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/local/bin/ --filename=composer \
