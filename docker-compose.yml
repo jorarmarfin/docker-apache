@@ -14,7 +14,7 @@ services:
     container_name: srv-mysql
     image: mysql:5.7
     ports:
-      - ${PUERTO_mysql}:3306
+      - ${PUERTO_MYSQL}:3306
     environment:
       - MYSQL_ROOT_PASSWORD=${PASS_MYSQL}
     volumes:
@@ -27,7 +27,7 @@ services:
     container_name: srv-adminer
     image: adminer:latest
     ports:
-      - ${PUERTO_gestor}:8080
+      - ${PUERTO_GESTOR}:8080
     restart: always
     networks:
       - net-apache
