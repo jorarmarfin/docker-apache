@@ -2,7 +2,11 @@ version: '3'
 services:
   web:
     container_name: srv-apache
+<<<<<<< HEAD
     image: jorarmarfin/apache-php:7.2
+=======
+    image: jorarmarfin/apache-php:${VERSION_PHP}
+>>>>>>> 4eca16d8abc42e19feca0cadc3cc0a1eac49c7e6
     volumes:
       - ./apache/html:/var/www/html
     ports:
