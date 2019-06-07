@@ -48,5 +48,5 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 
 EXPOSE 80
 
-CMD ["cron", "-f"]
+
 
