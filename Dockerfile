@@ -1,6 +1,9 @@
 FROM php:7.2-apache
 
 ENV TZ=America/Lima
+# Environments vars
+ENV TERM=xterm
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y \
     libpng-dev \
@@ -14,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
-    vim git sudo zip cron python3 python3-venv jq mysql-client unzip cron \
+    vim git sudo zip cron python python3 python3-venv jq mysql-client unzip cron \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
     && docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-install gd mbstring pdo_mysql pdo_pgsql zip mysqli opcache bcmath soap bz2 xsl intl xml \
