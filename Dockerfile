@@ -17,7 +17,9 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
-    vim git sudo zip cron python python3 python3-venv jq mysql-client unzip cron \
+    #Programas
+    vim git sudo zip cron python python3 python3-venv jq mysql-client unzip cron supervisor \
+    #Plugins
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
     && docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-install gd mbstring pdo_mysql pdo_pgsql zip mysqli opcache bcmath soap bz2 xsl intl xml \
@@ -25,7 +27,6 @@ RUN apt-get update && apt-get install -y \
     && pecl install apcu  \
     && pecl install redis-3.1.1 \ 
     && docker-php-ext-enable redis \
-    && docker-php-ext-enable mysqli \
     && docker-php-ext-enable apcu \
     && docker-php-ext-enable mcrypt \
     && a2enmod rewrite \
@@ -51,5 +52,8 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 
 EXPOSE 80
 
+# Init
+ADD ./files/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
 
