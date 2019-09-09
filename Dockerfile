@@ -11,16 +11,13 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     libxml2-dev \
     libbz2-dev  \
-    libxslt1-dbg \
-    libxslt1-dev \
-    libxslt1.1  \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
     vim git sudo zip cron python python3 python3-venv jq unzip cron wget \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
     && docker-php-ext-configure opcache --enable-opcache \
-    && docker-php-ext-install gd mbstring pdo_mysql pdo_pgsql zip mysqli opcache bcmath soap bz2 xsl intl xml \
+    && docker-php-ext-install gd mbstring pdo_mysql pdo_pgsql zip mysqli opcache bcmath soap bz2  intl xml \
     && pecl install mcrypt-1.0.1 \
     && pecl install apcu  \
     && pecl install redis-3.1.1 \
