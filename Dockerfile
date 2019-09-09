@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install gd mbstring pdo_mysql pdo_pgsql zip mysqli opcache bcmath soap bz2 xsl intl xml \
     && pecl install mcrypt-1.0.1 \
     && pecl install apcu  \
-    && pecl install redis-3.1.1 \ 
+    && pecl install redis-3.1.1 \
     && docker-php-ext-enable redis \
     && docker-php-ext-enable mysqli \
     && docker-php-ext-enable apcu \
@@ -51,5 +51,5 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 
 EXPOSE 80
 
-
+WORKDIR /var/www/
 

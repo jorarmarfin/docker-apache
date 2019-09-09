@@ -1,4 +1,4 @@
-docker build -t jorarmarfin/apache-php:7.2 .
+docker build -t jorarmarfin/apache-php:latest .
 
 docker build -t jorarmarfin/apache-php:7.0 .
 
