@@ -4,7 +4,8 @@ services:
     container_name: srv-apache
     image: jorarmarfin/apache-php:latest
     volumes:
-      - ./apache/html:/var/www/html
+      - ./apache/www:/var/www
+      - ./apache/backup:/backup
     ports:
       - 9001:80
     restart: always
