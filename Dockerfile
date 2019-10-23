@@ -26,6 +26,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-enable apcu \
     && docker-php-ext-enable mcrypt \
     && a2enmod rewrite \
+    && a2enmod substitute \
     && chmod 0777 -Rf /var/www \
     && rm -rf /var/lib/apt/lists/*
 
