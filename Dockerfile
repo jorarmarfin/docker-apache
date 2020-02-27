@@ -1,5 +1,6 @@
 FROM php:7.2-apache
 
+
 ENV TZ=America/Lima
 # Environments vars
 ENV TERM=xterm
