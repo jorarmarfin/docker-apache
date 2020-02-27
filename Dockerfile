@@ -1,4 +1,4 @@
-FROM php:5.3-apache
+FROM php:5.4.45-apache
 
 ENV TZ=America/Lima
 # Environments vars
@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y  --force-yes apt-utils \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
     vim git sudo zip cron python jq mysql-client unzip cron wget \
+    && docker-php-ext-install zip bcmath dom gd \
     && a2enmod rewrite \
     && chmod 0777 -Rf /var/www \
     && rm -rf /var/lib/apt/lists/*
