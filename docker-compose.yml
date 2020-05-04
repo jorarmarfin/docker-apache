@@ -2,12 +2,12 @@ version: '3'
 services:
   web:
     container_name: srv-apache
-    image: jorarmarfin/apache-php:7.2
+    image: jorarmarfin/apache-php:7.0
     volumes:
       - ./apache/www:/var/www
       - ./apache/backup:/backup
     ports:
-      - ${PUERTO_APACHE}:80
+      - 9001:80
     restart: always
     networks:
       - net-apache
@@ -15,12 +15,13 @@ services:
     container_name: srv-mysql
     image: mysql:5.7
     ports:
-      - ${PUERTO_MYSQL}:3306
+      - 3307:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=${PASS_MYSQL}
+      - MYSQL_ROOT_PASSWORD=root
     volumes:
-      - ${MYSQL_FILES}:/var/lib/mysql
-      - ${MYSQL_CONFIG}:/etc/mysql/conf.d
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf:/etc/mysql/conf.d
+      - ./mysql/backup:/backup
     restart: always
     networks:
       - net-apache
@@ -28,7 +29,7 @@ services:
     container_name: srv-adminer
     image: adminer:latest
     ports:
-      - ${PUERTO_GESTOR}:8080
+      - 8080:8080
     restart: always
     networks:
       - net-apache
