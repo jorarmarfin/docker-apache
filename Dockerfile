@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:7.3-apache
 
 
 ENV TZ=America/Lima
@@ -14,18 +14,16 @@ RUN apt-get update && apt-get install -y \
     libbz2-dev  \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
-    libmcrypt-dev \
+    libzip-dev \
     vim git sudo zip cron python python3 python3-venv python3-pip jq unzip cron wget mariadb-client \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
     && docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-install gd mbstring pdo_mysql pdo_pgsql zip mysqli opcache bcmath soap bz2  intl xml \
-    && pecl install mcrypt-1.0.1 \
     && pecl install apcu  \
     && pecl install redis-3.1.1 \
     && docker-php-ext-enable redis \
     && docker-php-ext-enable mysqli \
     && docker-php-ext-enable apcu \
-    && docker-php-ext-enable mcrypt \
     && a2enmod rewrite \
     && a2enmod substitute \
     && chmod 0777 -Rf /var/www \
@@ -51,4 +49,3 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 EXPOSE 80
 
 WORKDIR /var/www/
-
