@@ -1,0 +1,36 @@
+version: '3'
+services:
+  web:
+    container_name: srv-pagoonline-apache
+    image: jorarmarfin/apache-php:7.3
+    volumes:
+      - ./apache/www:/var/www
+      - ./backup:/backup
+    ports:
+      - 18181:80
+    restart: always
+    networks:
+      - net-pagoonline
+  db:
+    container_name: srv-pagoonline-mysql
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=drupal
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf:/etc/mysql/conf.d
+      - ./backup:/backup
+    restart: always
+    networks:
+      - net-pagoonline
+  adminer:
+    container_name: srv-pagoonline-adminer
+    image: adminer:latest
+    ports:
+      - 8080:8080
+    restart: always
+    networks:
+      - net-pagoonline
+networks:
+  net-pagoonline:
