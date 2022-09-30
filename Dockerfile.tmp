@@ -34,21 +34,24 @@ RUN apt-get update && apt-get install -y \
 COPY ./files/*.ini /usr/local/etc/php/conf.d/
 COPY ./files/entrypoint.sh /sbin/entrypoint.sh
 
-# Installation of compass
-RUN apt-get update && \
-    apt-get install -y git ruby-full && \
-    gem install --no-rdoc --no-ri sass -v 3.4.22 && \
-    gem install --no-rdoc --no-ri compass && \
-    gem install susy
-
 #Instalacion de composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/local/bin/ --filename=composer \
     && rm /var/www/html/composer-setup.php 
 
+# Cleaning
+RUN apt-get purge -y --auto-remove $BUILD_DEPS \
+	&& apt-get autoremove -y \
+	&& rm -rf /var/lib/apt/lists/* \
+	# Forward request and error logs to docker log collector
+	&& ln -sf /dev/stdout /var/log/apache2/access.log \
+	&& ln -sf /dev/stderr /var/log/apache2/error.log \
+    && touch /var/www/html/index.php \
+    && echo "<?php phpinfo();">> /var/www/html/index.php
+
 # Microsoft SQL Server Prerequisites
 RUN apt-get update \
-    && apt-get install -y gnupg gnupg1 gnupg2 \
+    && apt-get install -y gnupg gnupg1 gnupg2 unixodbc-dev unixodbc \
     && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
     && curl https://packages.microsoft.com/config/debian/10/prod.list \
         > /etc/apt/sources.list.d/mssql-release.list \
@@ -59,7 +62,6 @@ RUN apt-get update \
     && locale-gen \
     && apt-get update \
     && apt-get -y --no-install-recommends install \
-        unixodbc-dev \
         msodbcsql17 \
         mssql-tools \
         && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc 
@@ -69,4 +71,3 @@ RUN pecl install sqlsrv pdo_sqlsrv \
 EXPOSE 80
 
 WORKDIR /var/www/
-
