@@ -3,10 +3,13 @@ version: '3'
 services:
   web:
     container_name: srv-apache-test
-    build:
-        context: .
-        dockerfile: ./Dockerfile
+    image: jorarmarfin/apache-php:tmp1
+    # build:
+    #     context: .
+    #     dockerfile: ./Dockerfile
     ports:
         - '9001:80'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
         - './web:/var/www/html'

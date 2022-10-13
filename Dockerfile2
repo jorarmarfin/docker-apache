@@ -1,0 +1,6 @@
+FROM jorarmarfin/apache-php:tmp
+
+RUN pecl install xdebug-3.2.0alpha3  \
+    && docker-php-ext-enable xdebug
+
+COPY ./files/*.ini /usr/local/etc/php/conf.d/
