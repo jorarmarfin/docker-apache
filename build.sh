@@ -1,6 +1,6 @@
 docker build -t jorarmarfin/apache-php:tmp .
 docker build -t jorarmarfin/apache-php:tmp1 .
-docker build -t jorarmarfin/apache-php:7.2 .
+docker build -t jorarmarfin/apache-php:8.1 .
 docker build -t drinuxsac/qcrm2:1.0 .
 
 docker build -t jorarmarfin/apache-php:7.4.22 .
