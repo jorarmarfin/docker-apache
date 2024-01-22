@@ -1,4 +1,4 @@
-FROM php:8.0-apache
+FROM php:8.1-apache
 
 
 ENV TZ=America/Lima
@@ -19,8 +19,6 @@ RUN apt-get update && apt-get install -y \
     vim git sudo zip cron python python3 python3-venv python3-pip jq unzip cron wget mariadb-client \
     && docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-install gd pdo_mysql pdo_pgsql zip mysqli opcache bcmath soap bz2  intl xml \
-    && pecl install xdebug-3.2.0alpha3  \
-    && docker-php-ext-enable xdebug  \
     && a2enmod rewrite \
     && a2enmod substitute \
     && chmod 0777 -Rf /var/www \
