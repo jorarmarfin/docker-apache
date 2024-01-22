@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libzip-dev \
-    vim git sudo zip cron python3 python3-venv python3-pip jq unzip cron wget mariadb-client \
+    vim git sudo zip cron python python3 python3-venv python3-pip jq unzip cron wget mariadb-client \
     && docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-install gd pdo_mysql pdo_pgsql zip mysqli opcache bcmath soap bz2  intl xml \
     && a2enmod rewrite \
