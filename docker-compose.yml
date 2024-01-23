@@ -4,7 +4,8 @@ services:
     container_name: srv-apache
     image: jorarmarfin/apache-php:latest
     volumes:
-      - ./apache/html:/var/www/html
+      - ./apache/www/html:/var/www/html
+      - ./backup:/backup
     ports:
       - 9001:80
     restart: always
@@ -20,7 +21,7 @@ services:
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/conf:/etc/mysql/conf.d
-      - ./mysql/backup:/backup
+      - ./backup:/backup
     restart: always
     networks:
       - net-apache
