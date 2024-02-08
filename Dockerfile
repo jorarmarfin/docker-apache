@@ -1,4 +1,4 @@
-FROM php:8.1-apache
+FROM php:8.1.6-apache
 
 
 ENV TZ=America/Lima
@@ -15,9 +15,12 @@ RUN apt-get update && apt-get install -y \
     libbz2-dev  \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
+    libpng-dev \
+    libwebp-dev \
     libzip-dev \
     vim git sudo zip cron python3 python3-venv python3-pip jq unzip cron wget mariadb-client \
-    && docker-php-ext-configure opcache --enable-opcache \
+    && docker-php-ext-configure opcache --enable-opcache  \
+    && docker-php-ext-configure gd --enable-gd --prefix=/usr --with-jpeg --with-webp --with-freetype  \
     && docker-php-ext-install gd pdo_mysql pdo_pgsql zip mysqli opcache bcmath soap bz2  intl xml \
     && a2enmod rewrite \
     && a2enmod substitute \
@@ -39,8 +42,8 @@ COPY ./files/entrypoint.sh /sbin/entrypoint.sh
 #Instalacion de composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/local/bin/ --filename=composer \
-    && rm /var/www/html/composer-setup.php 
-    
+    && rm /var/www/html/composer-setup.php
+
 EXPOSE 80
 
 WORKDIR /var/www/
