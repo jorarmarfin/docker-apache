@@ -1,5 +1,4 @@
-FROM php:8.1.6-apache
-
+FROM php:8.1.27-apache
 
 ENV TZ=America/Lima
 # Environments vars
@@ -43,6 +42,9 @@ COPY ./files/entrypoint.sh /sbin/entrypoint.sh
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/local/bin/ --filename=composer \
     && rm /var/www/html/composer-setup.php
+
+#Instalar Node JS
+RUN curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - && sudo apt-get install -y nodejs
 
 EXPOSE 80
 

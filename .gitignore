@@ -1,4 +1,5 @@
-/apache
-/mysql
-/pgsql
-/.idea
+apache
+mysql
+pgsql
+.idea
+.vscode
